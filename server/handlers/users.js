@@ -48,7 +48,63 @@ const getUser = async (request,response) => {
 }
 
 const addUser = async (request,response) => {
-
+    const client = new MongoClient(MONGO_URI,option)
+    const userInfo = request.body
+    let failed = false;
+    const failureList = []
+    try {
+        await client.connect()
+        const db = client.db()
+        const users = await db.collection('users').findOne({email: userInfo.email})
+        if(users !== null){
+            failed = true;
+            failureList.push('Email already taken.')
+        }
+        if(userInfo.password !== userInfo.confirmPassword){
+            failed = true;
+            failureList.push('Password must be identical.')
+        }
+        if(userInfo.password.length < 8){
+            failed = true;
+            failureList.push('Password must be at least 8 char long.')
+        }
+        
+        if(failed){
+            throw new Error()
+        }else {
+            const user = {
+                _id : uuidv4(),
+                email : userInfo.email,
+                firstName : userInfo.firstName,
+                lastName : userInfo.lastName,
+                password : userInfo.password,
+                userType : 1,
+                phone : userInfo.phone,
+                address : {
+                    street : userInfo.address,
+                    city : userInfo.city,
+                    zip : userInfo.zip,
+                    province : userInfo.province,
+                    country : userInfo.country
+                },
+                favorite : [],
+                recentlyViewed : [],
+                orders : [],
+                cart : [],
+            }
+            const result = await db.collection('users').insertOne(user)
+            console.log(result)
+            if(result.insertedId !== undefined){
+                return response.status(200).json({status:200,message : "Successfully created!",data : user})
+            }else {
+                return response.status(404).json({status:404,message : "Something went wrong creating the account, please retry again."})
+            }
+        }
+    } catch (error) {
+        return response.status(404).json({status:404, error : failureList})
+    }finally{
+        client.close()
+    }
 }
 
 module.exports = {getUser,getUsers,addUser}

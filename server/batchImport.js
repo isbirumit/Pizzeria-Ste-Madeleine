@@ -16,7 +16,7 @@ const batchImport = async () =>{
     const admin = {
         _id : uuidv4(),
         password : "PizzSteMad123!@#",
-        name : "admin",
+        firstName : "admin",
         lastName : "adminLastName",
         email : "admin@admin.com",
         phone : "5149999999",
@@ -27,6 +27,7 @@ const batchImport = async () =>{
             province : "Quebec",
             country : "Canada",
         },
+        userType : 3,
         favorite : [],
         recentlyViewed : [],
         orders : [],
