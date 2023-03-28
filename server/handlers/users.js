@@ -29,7 +29,22 @@ const getUsers = async (request,response) => {
 }
 
 const getUser = async (request,response) => {
-
+    const client = new MongoClient(MONGO_URI,option)
+    const userId = request.params.userId
+    try {
+        await client.connect()
+        const db = client.db()
+        const user = await db.collection('users').findOne({_id : userId})
+        if(user === null){
+            throw new Error ('user not found')
+        }else {
+            return response.status(200).json({status:200, message : 'User found', data : user})
+        }
+    } catch (error) {
+        return response.status(404).json({status : 404,error : error.message})
+    }finally{
+        client.close()
+    }
 }
 
 const addUser = async (request,response) => {
