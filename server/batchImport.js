@@ -35,10 +35,8 @@ const batchImport = async () =>{
 
     try{
         await client.connect()
-        console.log('connected')
         const db = client.db()
         const adminUser = await db.collection('users').insertOne(admin)
-        
         client.close()
     }catch(error){
         console.error(error.message)

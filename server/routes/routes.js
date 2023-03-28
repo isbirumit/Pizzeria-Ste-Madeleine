@@ -26,3 +26,6 @@ router.get('/stm/orders/:orderId',getOrder)
 router.post('/stm/order',addOrder)
 router.patch('/stm/orders/:orderId',patchOrder)
 router.delete('/stm/orders/:orderId',deleteOrder)
+
+
+module.exports = router
