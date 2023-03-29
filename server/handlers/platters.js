@@ -8,16 +8,16 @@ const option = {
 
 const { v4: uuidv4 } = require('uuid')
 
-const getPizzas= async (request,response) => {
+const getPlatters= async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
     try {
         await client.connect()
         const db = client.db()
-        const pizzas = await db.collection('pizzas').find().toArray()
-        if(pizzas.length > 0){
-            return response.status(200).json({status:200,message : "pizzas retrieved from database", data : pizzas})
+        const platters = await db.collection('platters').find().toArray()
+        if(platters.length > 0){
+            return response.status(200).json({status:200,message : "platters retrieved from database", data : platters})
         }else {
-            throw new Error("Something went wrong trying to retrieve pizzas from database")
+            throw new Error("Something went wrong trying to retrieve platters from database")
         } 
     } catch (error) {
         return response.status(404).json({status : 404,error : error.message})
@@ -26,16 +26,16 @@ const getPizzas= async (request,response) => {
     }
 }
 
-const getPizza = async (request,response) => {
+const getPlatter = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
     try {
         await client.connect()
         const db = client.db()
-        const pizza = await db.collection('pizzas').findOne({_id : request.params.pizzaId})
-        if(pizza !== null) {
-            return response.status(200).json({status : 200, message : "pizza retrieved from data" , data : pizza})
+        const platter = await db.collection('platters').findOne({_id : request.params.platterId})
+        if(platter !== null) {
+            return response.status(200).json({status : 200, message : "platter retrieved from data" , data : platter})
         }else {
-            throw new Error("Something went wrong trying to retrieve the pizza from database")
+            throw new Error("Something went wrong trying to retrieve the platter from database")
         }
     } catch (error) {
         return response.status(404).json({status : 404,error : error.message})
@@ -44,7 +44,7 @@ const getPizza = async (request,response) => {
     }
 }
 
-const addPizza = async (request,response) => {
+const addPlatter = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
     
     try {
@@ -56,7 +56,7 @@ const addPizza = async (request,response) => {
     }
 }
 
-const patchPizza = async (request,response) => {
+const patchPlatter = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
     
     try {
@@ -68,7 +68,7 @@ const patchPizza = async (request,response) => {
     }
 }
 
-const deletePizza = async (request,response) => {
+const deletePlatter = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
     
     try {
@@ -80,4 +80,4 @@ const deletePizza = async (request,response) => {
     }
 }
 
-module.exports = {getPizzas,getPizza,addPizza,patchPizza,deletePizza}
+module.exports = {getPlatters,getPlatter,addPlatter,patchPlatter,deletePlatter}

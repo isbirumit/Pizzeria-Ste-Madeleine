@@ -62,18 +62,18 @@ router.delete('/stm/pizzas/:pizzaId',deletePizza)
 //platers
 
 const {
-    getPlaters,
-    getPlater,
-    addPlater,
-    patchPlater,
-    deletePlater
-} = require('../handlers/platers')
+    getPlatters,
+    getPlatter,
+    addPlatter,
+    patchPlatter,
+    deletePlatter
+} = require('../handlers/platters')
 
-router.get('/stm/platers',getPlaters)
-router.get('/stm/platers/:platerId',getPlater)
-router.post('/smt/plater',addPlater)
-router.patch('/stm/platers/:platerId',patchPlater)
-router.delete('/stm/platers/:platerId',deletePlater)
+router.get('/stm/platters',getPlatters)
+router.get('/stm/platters/:platterId',getPlatter)
+router.post('/smt/platters',addPlatter)
+router.patch('/stm/platters/:platterId',patchPlatter)
+router.delete('/stm/platters/:platterId',deletePlatter)
 
 //snacks
 
