@@ -21,7 +21,6 @@ const getOrders = async (request,response) => {
 
 const getOrder = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
-    
     try {
         
     } catch (error) {
