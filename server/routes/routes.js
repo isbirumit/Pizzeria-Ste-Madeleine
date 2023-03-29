@@ -54,10 +54,10 @@ const {
 } = require('../handlers/pizzas')
 
 router.get('/stm/pizzas',getPizzas)
-router.get('/stm/pizzas/:comboName',getPizza)
+router.get('/stm/pizzas/:pizzaId',getPizza)
 router.post('/smt/pizza',addPizza)
-router.patch('/stm/pizzas/:comboName',patchPizza)
-router.delete('/stm/pizzas/:comboName',deletePizza)
+router.patch('/stm/pizzas/:pizzaId',patchPizza)
+router.delete('/stm/pizzas/:pizzaId',deletePizza)
 
 //platers
 
@@ -70,10 +70,10 @@ const {
 } = require('../handlers/platers')
 
 router.get('/stm/platers',getPlaters)
-router.get('/stm/platers/:comboName',getPlater)
+router.get('/stm/platers/:platerId',getPlater)
 router.post('/smt/plater',addPlater)
-router.patch('/stm/platers/:comboName',patchPlater)
-router.delete('/stm/platers/:comboName',deletePlater)
+router.patch('/stm/platers/:platerId',patchPlater)
+router.delete('/stm/platers/:platerId',deletePlater)
 
 //snacks
 
@@ -86,10 +86,10 @@ const {
 } = require('../handlers/snacks')
 
 router.get('/stm/snacks',getSnacks)
-router.get('/stm/snacks/:comboName',getSnack)
+router.get('/stm/snacks/:snackId',getSnack)
 router.post('/smt/snack',addSnack)
-router.patch('/stm/snacks/:comboName',patchSnack)
-router.delete('/stm/snacks/:comboName',deleteSnack)
+router.patch('/stm/snacks/:snackId',patchSnack)
+router.delete('/stm/snacks/:snackId',deleteSnack)
 
 //submarines
 
@@ -102,10 +102,10 @@ const {
 } = require('../handlers/submarines')
 
 router.get('/stm/submarines',getSubmarines)
-router.get('/stm/submarines/:comboName',getSubmarine)
+router.get('/stm/submarines/:submarineId',getSubmarine)
 router.post('/smt/submarine',addSubmarine)
-router.patch('/stm/submarines/:comboName',patchSubmarine)
-router.delete('/stm/submarines/:comboName',deleteSubmarine)
+router.patch('/stm/submarines/:submarineId',patchSubmarine)
+router.delete('/stm/submarines/:submarineId',deleteSubmarine)
 
 
 //pastas
@@ -135,10 +135,10 @@ const {
 } = require('../handlers/poutines')
 
 router.get('/stm/poutines',getPoutines)
-router.get('/stm/poutines/:comboName',getPoutine)
+router.get('/stm/poutines/:poutineId',getPoutine)
 router.post('/smt/poutine',addPoutine)
-router.patch('/stm/poutines/:comboName',patchPoutine)
-router.delete('/stm/poutines/:comboName',deletePoutine)
+router.patch('/stm/poutines/:poutineId',patchPoutine)
+router.delete('/stm/poutines/:poutineId',deletePoutine)
 
 //salads
 
@@ -151,10 +151,10 @@ const {
 } = require('../handlers/salads')
 
 router.get('/stm/salads',getSalads)
-router.get('/stm/salads/:comboName',getSalad)
+router.get('/stm/salads/:saladId',getSalad)
 router.post('/smt/salad',addSalad)
-router.patch('/stm/salads/:comboName',patchSalad)
-router.delete('/stm/salads/:comboName',deleteSalad)
+router.patch('/stm/salads/:saladId',patchSalad)
+router.delete('/stm/salads/:saladId',deleteSalad)
 
 
 
