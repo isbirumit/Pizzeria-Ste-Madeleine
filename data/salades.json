@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Salade du chef",
+        "description" : "Laitues Iceberg, Oignons, Comcombres, Tomates et sauce Italienne",
+        "price" : {
+            "small" : 10.99,
+            "large" : 11.99
+        }
+    },
+    {
+        "name": "Salade César",
+        "description" : "Laitues, Bacons, Croutons et sauce César",
+        "price" : {
+            "small" : 10.99,
+            "large" : 11.99
+        }
+    },
+    {
+        "name": "Salade Grecque",
+        "description" : "Laitues Iceberg, Oignons, Comcombres, Feta, Tomates, Olive Noire et sauce Grecque",
+        "price" : {
+            "small" : 12.99,
+            "large" : 13.99
+        }
+    },
+    {
+        "name": "Salade Poulet",
+        "description" : "Laitues Iceberg, Oignons, Comcombres, Tomates, Olive Noire, Poulet et sauce Italienne",
+        "price" : {
+            "small" : 12.99,
+            "large" : 13.99
+        }
+    }
+]

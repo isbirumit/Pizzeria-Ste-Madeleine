@@ -1,0 +1,32 @@
+[
+    {
+        "name" : "Pepperoni",
+        "description" : "Pepperoni",
+        "size" : 10,
+        "price" : 16.99
+    },
+    {
+        "name" : "Pepperoni et Steak",
+        "description" : "Pepperoni,Steak et Fromage",
+        "size" : 10,
+        "price" : 16.99
+    },
+    {
+        "name" : "Poulet",
+        "description" : "Poulet, Champignons, Oignons et Fromage",
+        "size" : 10,
+        "price" : 16.99
+    },
+    {
+        "name" : "Toute Garnie",
+        "description" : "Pepperoni, Steak, Oignons, Piments Vert, Champignons et Fromage",
+        "size" : 10,
+        "price" : 16.99
+    },
+    {
+        "name" : "Végétarien",
+        "description" : "Oignons, Piments Vert, Champignons, Olives Vertes et Fromage",
+        "size" : 10,
+        "price" : 16.99
+    }
+]

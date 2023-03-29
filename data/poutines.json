@@ -1,0 +1,42 @@
+[
+    {
+        "name" : "Poutine Régulière",
+        "price" : {
+            "small" : 11.99,
+            "large" : 12.99
+        }
+        
+    },
+    {
+        "name" : "Poutine Italienne",
+        "price" : {
+            "small" : 12.99,
+            "large" : 14.99
+        }
+        
+    },
+    {
+        "name" : "Poutine Viande Fumée",
+        "price" : {
+            "small" : 12.99,
+            "large" : 14.99
+        }
+        
+    },
+    {
+        "name" : "Poutine Pepperoni",
+        "price" : {
+            "small" : 12.99,
+            "large" : 14.99
+        }
+        
+    },
+    {
+        "name" : "Poutine au poulet",
+        "price" : {
+            "small" : 12.99,
+            "large" : 14.99
+        }
+        
+    }
+]

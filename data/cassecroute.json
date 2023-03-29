@@ -1,0 +1,34 @@
+[
+    {
+        "name" : "Frites",
+        "price" : {
+            "small" : 5.49,
+            "large" : 7.99
+        }
+    },
+    {
+        "name" : "Frites Sauce BBQ",
+        "price" : {
+            "small" : 6.99,
+            "large" : 8.99
+        }
+    },
+    {
+        "name" : "Pain à l'ail",
+        "price" : {
+            "small" : 4.99
+        }
+    },
+    {
+        "name" : "Pain à l'ail gratiné",
+        "price" : {
+            "small" : 5.99
+        }
+    },
+    {
+        "name" : "Rondelles d'oignon",
+        "price" : {
+            "small" : 6.99
+        }
+    }
+]

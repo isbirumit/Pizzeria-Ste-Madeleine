@@ -1,0 +1,34 @@
+[
+    {
+        "name" : "Spaghetti",
+        "description" : "Sauce à la viande",
+        "price" : {
+            "small" : 12.99,
+            "large" : 13.99
+        }
+    },
+    {
+        "name" : "Spaghetti Viande Fumée",
+        "description" : "Sauce à la viande fumée",
+        "price" : {
+            "small" : 13.99,
+            "large" : 14.99
+        }
+    },
+    {
+        "name" : "Lasagne",
+        "description" : "Sauce à la viande",
+        "price" : {
+            "small" : 13.99,
+            "large" : 14.99
+        }
+    },
+    {
+        "name" : "Lasagne Toute Garnie",
+        "description" : "Sauce à la viande, Pepperonis, Champignons et Piments Vert",
+        "price" : {
+            "small" : 14.99,
+            "large" : 15.99
+        }
+    }
+]
