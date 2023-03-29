@@ -119,10 +119,10 @@ const {
 } = require('../handlers/pastas')
 
 router.get('/stm/pastas',getPastas)
-router.get('/stm/pastas/:comboName',getPasta)
+router.get('/stm/pastas/:pastaId',getPasta)
 router.post('/smt/pasta',addPasta)
-router.patch('/stm/pastas/:comboName',patchPasta)
-router.delete('/stm/pastas/:comboName',deletePasta)
+router.patch('/stm/pastas/:pastaId',patchPasta)
+router.delete('/stm/pastas/:pastaId',deletePasta)
 
 //poutines
 
