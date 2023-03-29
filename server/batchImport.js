@@ -19,6 +19,31 @@ const cassecroute = require('../data/cassecroute.json')
 // const extras = require('../data/extras.json') // WIP
 
 const batchImport = async () =>{
+    const newCombos = combos.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newPizzas = pizzas.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newPlaters = assietes.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newPates = pates.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newSousMarin = sousmarin.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newSalades = salades.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newPoutines = poutines.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+    const newCasseCroute = cassecroute.map(e => {
+        return {...e, _id : uuidv4()}
+    })
+
 
     const client = new MongoClient(MONGO_URI,option)
 
@@ -47,14 +72,14 @@ const batchImport = async () =>{
         await client.connect()
         const db = client.db()
         const adminUser = await db.collection('users').insertOne(admin)
-        await db.collection('combos').insertMany(combos)
-        await db.collection('pizzas').insertMany(pizzas)
-        await db.collection('platters').insertMany(assietes)
-        await db.collection('pastas').insertMany(pates)
-        await db.collection('salads').insertMany(salades)
-        await db.collection('poutines').insertMany(poutines)
-        await db.collection('snacks').insertMany(cassecroute)
-        await db.collection('submarines').insertMany(sousmarin)
+        await db.collection('combos').insertMany(newCombos)
+        await db.collection('pizzas').insertMany(newPizzas)
+        await db.collection('platters').insertMany(newPlaters)
+        await db.collection('pastas').insertMany(newPates)
+        await db.collection('salads').insertMany(newSalades)
+        await db.collection('poutines').insertMany(newPoutines)
+        await db.collection('snacks').insertMany(newCasseCroute)
+        await db.collection('submarines').insertMany(newSousMarin)
         client.close()
     }catch(error){
         console.error(error.message)

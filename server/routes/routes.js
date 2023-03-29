@@ -38,10 +38,10 @@ const {
 } = require('../handlers/combos')
 
 router.get('/stm/combos',getCombos)
-router.get('/stm/combos/:comboName',getCombo)
+router.get('/stm/combos/:comboId',getCombo)
 router.post('/smt/combo',addCombo)
-router.patch('/stm/combos/:comboName',patchCombo)
-router.delete('/stm/combos/:comboName',deleteCombo)
+router.patch('/stm/combos/:comboId',patchCombo)
+router.delete('/stm/combos/:comboId',deleteCombo)
 
 //Pizzas
 
