@@ -30,14 +30,21 @@ const getUsers = async (request,response) => {
 
 const getUser = async (request,response) => {
     const client = new MongoClient(MONGO_URI,option)
-    const userId = request.params.userId
+    const userEmail = request.params.userEmail
+    const userPassword = request.params.password
+    console.log(userEmail)
+    console.log(userPassword)
     try {
         await client.connect()
         const db = client.db()
-        const user = await db.collection('users').findOne({_id : userId})
+        const user = await db.collection('users').findOne({email : userEmail})
         if(user === null){
             throw new Error ('user not found')
         }else {
+            if(user.password !== userPassword){
+                throw new Error('Password incorrect')
+            }
+            
             return response.status(200).json({status:200, message : 'User found', data : user})
         }
     } catch (error) {

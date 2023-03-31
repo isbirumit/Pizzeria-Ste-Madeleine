@@ -8,7 +8,7 @@ const {
 } = require('../handlers/users')
 
 router.get('/stm/users',getUsers)
-router.get('/stm/users/:userId',getUser)
+router.get('/stm/users/:userEmail/:password',getUser)
 router.post('/stm/user',addUser)
 
 
