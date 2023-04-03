@@ -59,6 +59,7 @@ const addUser = async (request,response) => {
     const userInfo = request.body
     let failed = false;
     const failureList = []
+    console.log(userInfo)
     try {
         await client.connect()
         const db = client.db()
@@ -75,7 +76,7 @@ const addUser = async (request,response) => {
             failed = true;
             failureList.push('Password must be at least 8 char long.')
         }
-        
+        console.log(users)
         if(failed){
             throw new Error()
         }else {
@@ -99,6 +100,7 @@ const addUser = async (request,response) => {
                 orders : [],
                 cart : [],
             }
+            
             const result = await db.collection('users').insertOne(user)
             console.log(result)
             if(result.insertedId !== undefined){

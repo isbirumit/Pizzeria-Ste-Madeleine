@@ -1,9 +1,12 @@
+import { useContext } from "react"
 import styled from "styled-components"
+import { UserContext } from "./context/UserContext"
 import HomePageSwiperSlider from "./swiper-slider/HomePageSwiperSlider"
 
 
 const HomePage = () => {
-
+    const {currentUser} = useContext(UserContext)
+    console.log(currentUser)
     return (
         <>
             <HomePageWrapper>

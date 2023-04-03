@@ -1,13 +1,14 @@
 import styled from "styled-components"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
-
+import { UserContext } from "../context/UserContext"
 
 const formInit = {
     email: "",
     password: ""
 }
 const SignIn = ({setHasAccount}) => {
+    const {setCurrentUser} = useContext(UserContext)
     const [message,setMessage] = useState("")
     const [formInput, setFormInput] = useState(formInit)
     const handleSubmit = (e) => {
@@ -18,8 +19,8 @@ const SignIn = ({setHasAccount}) => {
             if(data.status === 404){
                 setMessage("Votre address email ou votre mot de passe est incorrect")
             }else{
-                setMessage("Email correct")
-                // localStorage.setItem("user",JSON.stringify(data.data))
+                localStorage.setItem("user",JSON.stringify(data.data))
+                setCurrentUser(data.data)
             }
         })
     }
@@ -33,12 +34,10 @@ const SignIn = ({setHasAccount}) => {
                     <Input type="password" required={true}/>
                 </Label>
                 <LogInBtn>Se connecter</LogInBtn>
-
                 <MessageBox>
                     {
                         message.length > 0 ? <h3>- {message}</h3> : null
                     }
-                    
                 </MessageBox>
             </FormBox>
             <SignUpBox>
@@ -46,6 +45,7 @@ const SignIn = ({setHasAccount}) => {
                 <SignUpBtn onClick={() => setHasAccount(false)}>Créer un compte</SignUpBtn>
                 <Link>Mot de passe oublié</Link>
             </SignUpBox>
+            
         </>
     )
 }

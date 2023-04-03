@@ -1,20 +1,28 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import backgroundImage from "../../public/backgroundimgs/loginBGIMG.jpg"
 import SignIn from "./SignIn"
-
+import SignUp from "./SignUp"
+import { UserContext } from "../context/UserContext"
 const SignInPage = () => {
     const [hasAccount, setHasAccount] = useState(true)
-    
+    const {currentUser} = useContext(UserContext)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(currentUser){
+            navigate('/')
+        }
+    })
     return(
+
         <Page style={{backgroundImage : `url(${backgroundImage})`}}>
             <LogInWrapper>
                 <LoginTitle>Bienvenue !</LoginTitle>
                 {
                     hasAccount 
                     ? <SignIn setHasAccount = {setHasAccount} />
-                    : <h1>Compte</h1>
+                    : <SignUp setHasAccount={setHasAccount}/>
                 }
             </LogInWrapper>
         </Page>

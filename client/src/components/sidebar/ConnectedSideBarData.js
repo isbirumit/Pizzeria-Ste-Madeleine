@@ -8,7 +8,7 @@ import * as GiIcons from "react-icons/gi"
 import * as FiIcons from "react-icons/fi"
 
 
-export const SideBarData = [
+export const ConnectedSideBarData = [
     {
         title: "Categorie",
         path: "#",
@@ -80,16 +80,9 @@ export const SideBarData = [
         iconOpened: <RiIcons.RiArrowUpSFill color="black"/>,
     },
     {
-        title: "S'enregistrer",
-        path: "./login",
-        icon: <IoIcons.IoIosCreate color="black"/>,
-        iconClosed: <RiIcons.RiArrowDownSFill color="black"/>,
-        iconOpened: <RiIcons.RiArrowUpSFill color="black"/>,
-    },
-    {
-        title: "Se connecter",
-        path: "./login",
-        icon: <FiIcons.FiLogIn color="black"/>,
+        title: "Deconnecter",
+        path: "/logout",
+        icon: "",
         iconClosed: <RiIcons.RiArrowDownSFill color="black"/>,
         iconOpened: <RiIcons.RiArrowUpSFill color="black"/>,
     },

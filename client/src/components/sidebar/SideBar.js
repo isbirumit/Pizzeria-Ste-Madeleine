@@ -1,16 +1,17 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { IconContext } from "react-icons/lib"
 import {FaBars} from "react-icons/fa"
 import {AiOutlineClose} from "react-icons/ai"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { SideBarData } from "./SideBarData"
+import { ConnectedSideBarData } from "./ConnectedSideBarData"
 import SubMenu from "./SubMenu"
-
+import { UserContext } from "../context/UserContext"
 
 const SideBar = () => {
     const [sidebar,setSidebar] = useState(false)
-
+    const {currentUser} = useContext(UserContext)
 
     const showSideBar = () => setSidebar(!sidebar)
 
@@ -27,9 +28,16 @@ const SideBar = () => {
                         <NavIcon style={{borderBottom: "2px solid #fff", backgroundColor : "red",height: "60px"}} to={'#'}>
                             <AiOutlineClose  onClick={showSideBar} />
                         </NavIcon>
-                        {SideBarData.map((item,index) => {
-                            return <SubMenu item={item} key={index} />
-                        })}
+                        {!currentUser ? 
+                            SideBarData.map((item,index) => {
+                                return <SubMenu item={item} key={index} />
+                            })
+                        : 
+                            ConnectedSideBarData.map((item,index) => {
+                                return <SubMenu item={item} key={index} />
+                            })
+                            
+                        }
                     </SideBarWrap>
                 </SideBarNav>
             </IconContext.Provider>
@@ -66,6 +74,9 @@ const SideBarNav = styled.div`
 `
 const SideBarWrap = styled.div`
     width: 100%;
+`
+const DisconnectButton = styled.button`
+
 `
 
 export default SideBar
