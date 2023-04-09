@@ -5,6 +5,7 @@
     max-width: 700px;
     margin: auto;
     transition:all 1s;
+    display: relative;
 }
 
 .Modalbox{

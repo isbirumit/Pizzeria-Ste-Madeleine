@@ -16,6 +16,7 @@ import Pastas from "./menu/categories/Pastas";
 import Poutines from "./menu/categories/Poutines";
 import Salads from "./menu/categories/Salads";
 import Snacks from "./menu/categories/Snacks";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Header />
+        <ToastContainer />
         <div>
           <Routes>
             <Route path="/" element= {<HomePage />} />

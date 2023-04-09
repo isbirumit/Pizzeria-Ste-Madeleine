@@ -1,5 +1,18 @@
 const router = require('express').Router()
 
+
+
+//API
+
+
+//weather
+const {
+    getWeather
+} =require('../handlers/weather')
+router.get('/stm/weather',getWeather)
+
+
+
 //users
 const {
     getUser,
@@ -163,6 +176,10 @@ const {
 } = require('../handlers/extrafastfood')
 
 router.get('/stm/extras/fastfood',getFastFoodExtras)
+
+
+
+
 
 
 module.exports = router

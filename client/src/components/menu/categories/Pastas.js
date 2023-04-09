@@ -40,7 +40,7 @@ const Pastas = () => {
             }
         })
     }  
-    const handleModalClick = (bool,blurr) => {
+    const handleModalClick = () => {
         setIsOpen(false)
     }
 

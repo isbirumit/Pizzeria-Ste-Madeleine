@@ -6,6 +6,7 @@ import BG from "../public/bg.jpg"
 import orderNowGif from "../public/homepage/orderNow.mp4"
 import Logogif from "../public/homepage/Pizzeria.mp4"
 import { Link, useNavigate } from "react-router-dom"
+import Weather from "./weather/Weather"
 
 const HomePage = () => {
     const {currentUser} = useContext(UserContext)
@@ -62,6 +63,7 @@ const HomePage = () => {
     return (
         <>
             <HomePageWrapper>
+                <Weather />
                 <TopPageBox>
                     <HomePageSwiperSlider />
                 </TopPageBox>
