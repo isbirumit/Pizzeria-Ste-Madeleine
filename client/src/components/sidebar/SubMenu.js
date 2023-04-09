@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 
 
-const SubMenu = ({item}) => {
+const SubMenu = ({item,showSideBar}) => {
     const [subnav, setSubnav] = useState(false)
     const showSubnav = () => setSubnav(!subnav)
 
@@ -27,7 +27,7 @@ const SubMenu = ({item}) => {
             {subnav &&
                 item.subNav.map((item, index) => {
                     return (
-                    <DropdownLink to={item.path} key={index}>
+                    <DropdownLink  to={item.path} onClick={showSideBar} key={index}>
                         {item.icon}
                         <SideBarLabelSub>{item.title}</SideBarLabelSub>
                     </DropdownLink>
@@ -39,7 +39,7 @@ const SubMenu = ({item}) => {
 
 const SideBarLink = styled(Link)`
     display: flex;
-    color: red;
+
     font-weight: bold;
     justify-content: space-between;
     align-items: center;
@@ -54,6 +54,7 @@ const SideBarLink = styled(Link)`
     border-top: 1px solid black;
     &:hover {
         background-color: white;
+        color: red;
         cursor: pointer;
     }
 `
@@ -85,7 +86,9 @@ const DropdownLink = styled(Link)`
     font-family: 'Open Sans', sans-serif;
     transition:250ms;
     &:hover {
-        background: #f7efdf;
+        color: hsl(28,53%,55%);
+        background-color: hsl(0,0%,93%);
+        /* background: hsl(28,53%,55%); */
         cursor: pointer;
     }
 `;

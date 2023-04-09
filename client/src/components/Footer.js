@@ -14,6 +14,6 @@ const Footer = styled.div`
     bottom: 0;
     width: auto;
     height: 60px;
-    background-color : #b30000;
+    background-color : hsl(28,53%,55%);
 `
 export default OrderNow

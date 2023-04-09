@@ -2,7 +2,10 @@ import styled from "styled-components"
 import {CgProfile} from "react-icons/cg"
 import SideBar from "./sidebar/SideBar"
 import { Link } from "react-router-dom"
+import { UserContext } from "./context/UserContext"
+import { useContext } from "react"
 const Header = () => {
+    const {currentUser,setCurrentUser} = useContext(UserContext)
 
     return (
         <>
@@ -13,9 +16,18 @@ const Header = () => {
                 <Logo to="/">
                     <LogoImg src={require('../public/ste-mad-logo.png')}/>
                 </Logo>
-                <Profil to={"../profil/profil"}>
-                    <ProfilCg />
-                </Profil>
+                {
+                    !currentUser 
+                    ?
+                    <Profil to={"/login"}>
+                        <ProfilCg />
+                    </Profil>
+                    :
+                    <Profil to={`/profil/${currentUser.firstName}`}>
+                        <ProfilCg />
+                    </Profil>
+                }
+                
             </HeaderWrapper>
         </>
     )
@@ -28,11 +40,11 @@ const HeaderWrapper = styled.div`
     justify-content: space-between;
     width: auto;
     height: 60px;
-    background-color: #b30000;
+    background-image: linear-gradient(to right,hsl(28,58%,30%),hsl(16,96%,52%));
     border-bottom: solid 2px white;
-    -webkit-box-shadow: 0px 6px 11px -5px rgba(252,0,0,0.56);
-    -moz-box-shadow: 0px 6px 11px -5px rgba(252,0,0,0.56);
-    box-shadow: 0px 6px 11px -5px rgba(252,0,0,0.56);
+    -webkit-box-shadow: 0px 6px 11px -5px rgba(201,136,80,0.56);
+    -moz-box-shadow: 0px 6px 11px -5px rgba(201,136,80,0.56);
+    box-shadow: 0px 6px 11px -5px rgba(201,136,80,0.56);
     z-index: 100;
 `
 const DropDownMenu = styled.div`

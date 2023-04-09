@@ -156,6 +156,13 @@ router.post('/smt/salad',addSalad)
 router.patch('/stm/salads/:saladId',patchSalad)
 router.delete('/stm/salads/:saladId',deleteSalad)
 
+// FastFoodExtras
+
+const {
+    getFastFoodExtras,
+} = require('../handlers/extrafastfood')
+
+router.get('/stm/extras/fastfood',getFastFoodExtras)
 
 
 module.exports = router

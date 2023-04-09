@@ -18,56 +18,56 @@ export const ConnectedSideBarData = [
         subNav: [
             {
                 title: "Pizza 2 pour 1",
-                path: "#",
+                path: "/menu/2pizzas",
                 icon: <GiIcons.GiFullPizza fontSize={"200%"} color="black"/>,
                 cName: "sub-nav"
             },
             {
                 title: "Pizza seule",
-                path: "#",
+                path: "/menu/pizza",
                 icon: <FaIcons.FaPizzaSlice fontSize={"200%"} color="black"/>,
                 cName: "sub-nav"
             },
             {
                 title: "Nos Assiettes",
-                path: "#",
+                path: "/menu/platters",
                 icon: <RiIcons.RiRestaurant2Fill fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Combos",
-                path: "#",
+                path: "/menu/combos",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Pates",
-                path: "#",
+                path: "/menu/pastas",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Poutines",
-                path: "#",
+                path: "/menu/poutines",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Sous-Marins ",
-                path: "#",
+                path: "/menu/submarines",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Salades",
-                path: "#",
+                path: "/menu/salads",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
             {
                 title: "Nos Casse-Croutes",
-                path: "#",
+                path: "/menu/snacks",
                 icon: <IoIcons.IoIosPaper fontSize={"200%"} color="black"/>
             },
           ]
     },
     {
         title: "Menu",
-        path: "#",
+        path: "/menu",
         icon: <MdIcons.MdRestaurantMenu color="black"/>,
         iconClosed: <RiIcons.RiArrowDownSFill color="black"/>,
         iconOpened: <RiIcons.RiArrowUpSFill color="black"/>,

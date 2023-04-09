@@ -25,16 +25,16 @@ const SideBar = () => {
                 </Nav>
                 <SideBarNav sidebar={sidebar}>
                     <SideBarWrap>
-                        <NavIcon style={{borderBottom: "2px solid #fff", backgroundColor : "red",height: "60px"}} to={'#'}>
+                        <NavIcon style={{borderBottom: "2px solid #fff", backgroundImage : "linear-gradient(to right,hsl(28,58%,30%),hsl(16,96%,52%))",height: "60px"}} to={'#'}>
                             <AiOutlineClose  onClick={showSideBar} />
                         </NavIcon>
                         {!currentUser ? 
                             SideBarData.map((item,index) => {
-                                return <SubMenu item={item} key={index} />
+                                return <SubMenu showSideBar={showSideBar} item={item} key={index} />
                             })
                         : 
                             ConnectedSideBarData.map((item,index) => {
-                                return <SubMenu item={item} key={index} />
+                                return <SubMenu showSideBar={showSideBar} item={item} key={index} />
                             })
                             
                         }
@@ -57,7 +57,7 @@ const NavIcon = styled(Link)`
     align-items: center;
 `
 const SideBarNav = styled.div`
-    background: #f7efdf;
+    background: hsl(0,0%,93%);
     width: 250px;
     height: 100vh;
     display: flex;
@@ -68,15 +68,13 @@ const SideBarNav = styled.div`
     transition: 500ms;
     z-index: 10;
     border-right : 2px solid #fff;
-    -webkit-box-shadow: 5px 1px 8px -6px rgba(255,0,0,1);
-    -moz-box-shadow: 5px 1px 8px -6px rgba(255,0,0,1);
-    box-shadow: 5px 1px 8px -6px rgba(255,0,0,1);
+    -webkit-box-shadow: 5px 1px 8px -6px rgba(201,136,80,1);
+    -moz-box-shadow: 5px 1px 8px -6px rgba(201,136,80,1);
+    box-shadow: 5px 1px 8px -6px rgba(201,136,80,1);
 `
 const SideBarWrap = styled.div`
     width: 100%;
 `
-const DisconnectButton = styled.button`
 
-`
 
 export default SideBar

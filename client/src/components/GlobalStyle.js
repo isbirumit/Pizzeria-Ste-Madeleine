@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import BG from "../public/bg.jpg";
+
 
 export default createGlobalStyle`
         *,
@@ -10,6 +12,7 @@ export default createGlobalStyle`
     list-style-type: none;
     }
     body{
-        background-color: #f7efdf;
+        background-color:hsl(0,0%,93%);
+        
     }
 `

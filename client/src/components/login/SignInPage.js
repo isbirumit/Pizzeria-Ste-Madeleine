@@ -36,7 +36,7 @@ const Page = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
-    height: 85vh;
+    height: 100vh;
 `
 const LoginTitle = styled.h1`
     color: white;
