@@ -44,7 +44,7 @@ const Poutines = () => {
         <Body style={{ backgroundImage: `url(${BG})` }}>
             {isOpen ? (
                 <AddCartModal
-                    type="poutine"
+                    type="pasta"
                     item={selectedItem}
                     handleModalClick={handleModalClick}
                 />

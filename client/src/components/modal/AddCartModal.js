@@ -12,7 +12,12 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
         item_id: "",
         name: "",
         size: type === "platter" ? "ind" : "small",
-        price: type === "platter" ? item.price["ind"] : item.price["small"],
+        price:
+            type === "platter"
+                ? item.price["ind"]
+                : type === "pizza"
+                ? item.price[`10"`]
+                : item.price["small"],
         extras: [],
         quantity: 1,
     };
@@ -31,6 +36,28 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const itemArr = [...currentUser.cart];
+        itemArr.push(cartForm);
+        fetch(`/stm/cart`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: currentUser._id,
+                cartArr: itemArr,
+            }),
+        })
+            .then((result) => result.json())
+            .then((data) => {
+                if (data.status === 404) {
+                    toast.error(data.error);
+                } else if (data.status === 200) {
+                    setCurrentUser({ ...currentUser, cart: itemArr });
+                    toast.success("Ajouter dans votre panier !:)");
+                }
+            });
     };
 
     const handleOptionChange = (e) => {
@@ -110,6 +137,15 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
                 item_id: item._id,
             });
             setLoadedCategory(true);
+        } else if (type == "submarine") {
+            setCartForm({
+                ...cartForm,
+                price: item.price,
+                size: "10",
+                name: item.name,
+                item_id: item._id,
+            });
+            setLoadedCategory(true);
         } else {
             setCartForm({ ...cartForm, name: item.name, item_id: item._id });
         }
@@ -161,6 +197,7 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
                                     return (
                                         <div key={each.name + each.price}>
                                             <ExtraBtn
+                                                type="button"
                                                 id={each.name}
                                                 onClick={(e) =>
                                                     handleExtraClilck(
@@ -236,6 +273,7 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
                                     return (
                                         <div key={each.name + each.price}>
                                             <ExtraBtn
+                                                type="button"
                                                 id={each.name}
                                                 onClick={(e) =>
                                                     handleExtraClilck(
@@ -477,6 +515,7 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
                                     return (
                                         <div key={each.name + each.price}>
                                             <ExtraBtn
+                                                type="button"
                                                 id={each.name}
                                                 onClick={(e) =>
                                                     handleExtraClilck(
@@ -537,7 +576,331 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
                     </form>
                 </div>
             );
+        case "snack":
+            return (
+                <div className="ModalContainer">
+                    <form onSubmit={handleSubmit} className="Modalbox">
+                        <ButtonClose onClick={handleModalClick}>X</ButtonClose>
+                        <ItemTitle>{item.name}</ItemTitle>
+                        <SizeBox>
+                            <Titles>Taille :</Titles>
+                            <RadioBox>
+                                <Radio>
+                                    <Label>
+                                        <input
+                                            type="radio"
+                                            onChange={handleOptionChange}
+                                            value={"small"}
+                                            checked={cartForm.size === "small"}
+                                            required={true}
+                                        />
+                                        Moyenne
+                                    </Label>
+                                </Radio>
+                                {Object.keys(item.price).length > 1 && (
+                                    <Radio>
+                                        <Label>
+                                            <input
+                                                type="radio"
+                                                onChange={handleOptionChange}
+                                                value={"large"}
+                                                checked={
+                                                    cartForm.size === "large"
+                                                }
+                                                required={true}
+                                            />
+                                            Grande
+                                        </Label>
+                                    </Radio>
+                                )}
+                            </RadioBox>
+                        </SizeBox>
+                        <ExtraBox>
+                            <Titles>Extras *max 4 : </Titles>
+                            <ExtraContainer>
+                                {fastFoodExtras.map((each) => {
+                                    return (
+                                        <div key={each.name + each.price}>
+                                            <ExtraBtn
+                                                type="button"
+                                                id={each.name}
+                                                onClick={(e) =>
+                                                    handleExtraClilck(
+                                                        e,
+                                                        each.price
+                                                    )
+                                                }
+                                            >
+                                                <ExtraName>
+                                                    {each.name}
+                                                </ExtraName>
+                                                <ExtraPrice>
+                                                    {each.price}
+                                                </ExtraPrice>
+                                            </ExtraBtn>
+                                        </div>
+                                    );
+                                })}
+                            </ExtraContainer>
+                        </ExtraBox>
+                        <ItemInformationBox>
+                            {btnExtras.map((extra) => {
+                                return (
+                                    <AddedExtraBtn
+                                        key={extra}
+                                        id={extra}
+                                        onClick={deleteItem}
+                                    >
+                                        {extra}
+                                    </AddedExtraBtn>
+                                );
+                            })}
+                        </ItemInformationBox>
+                        <ItemQuantity>
+                            <Label>
+                                Quantity:
+                                <Select
+                                    value={quantity}
+                                    onChange={handleQuantityChange}
+                                >
+                                    {[...Array(5)].map((_, i) => (
+                                        <option key={i} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </Label>
+                        </ItemQuantity>
+                        <EndBox>
+                            <CartButton onClick={handleAddCartBtn}>
+                                Ajouter au panier
+                            </CartButton>
+                            <ItemPrice>
+                                {" "}
+                                Prix : {cartForm.price.toFixed(2)}
+                            </ItemPrice>
+                        </EndBox>
+                    </form>
+                </div>
+            );
+        case "submarine":
+            return (
+                <div className="ModalContainer">
+                    <form onSubmit={handleSubmit} className="Modalbox">
+                        <ButtonClose onClick={handleModalClick}>X</ButtonClose>
+                        <ItemTitle>{item.name}</ItemTitle>
+                        <Titles>{item.description}</Titles>
 
+                        <ExtraBox>
+                            <Titles>Extras *max 4 : </Titles>
+                            <ExtraContainer>
+                                {fastFoodExtras.map((each) => {
+                                    return (
+                                        <div key={each.name + each.price}>
+                                            <ExtraBtn
+                                                type="button"
+                                                id={each.name}
+                                                onClick={(e) =>
+                                                    handleExtraClilck(
+                                                        e,
+                                                        each.price
+                                                    )
+                                                }
+                                            >
+                                                <ExtraName>
+                                                    {each.name}
+                                                </ExtraName>
+                                                <ExtraPrice>
+                                                    {each.price}
+                                                </ExtraPrice>
+                                            </ExtraBtn>
+                                        </div>
+                                    );
+                                })}
+                            </ExtraContainer>
+                        </ExtraBox>
+                        <ItemInformationBox>
+                            {btnExtras.map((extra) => {
+                                return (
+                                    <AddedExtraBtn
+                                        key={extra}
+                                        id={extra}
+                                        onClick={deleteItem}
+                                    >
+                                        {extra}
+                                    </AddedExtraBtn>
+                                );
+                            })}
+                        </ItemInformationBox>
+                        <ItemQuantity>
+                            <Label>
+                                Quantity:
+                                <Select
+                                    value={quantity}
+                                    onChange={handleQuantityChange}
+                                >
+                                    {[...Array(5)].map((_, i) => (
+                                        <option key={i} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </Label>
+                        </ItemQuantity>
+                        <EndBox>
+                            <CartButton onClick={handleAddCartBtn}>
+                                Ajouter au panier
+                            </CartButton>
+                            {!loadedCategory ? null : (
+                                <ItemPrice>
+                                    {" "}
+                                    Prix : {cartForm.price.toFixed(2)}
+                                </ItemPrice>
+                            )}
+                        </EndBox>
+                    </form>
+                </div>
+            );
+
+        case "pizza":
+            return (
+                <>
+                    <div className="ModalContainer">
+                        <form onSubmit={handleSubmit} className="Modalbox">
+                            <ButtonClose onClick={handleModalClick}>
+                                X
+                            </ButtonClose>
+                            <ItemTitle>{item.name}</ItemTitle>
+                            <SizeBox>
+                                <Titles>Taille :</Titles>
+                                <RadioBox>
+                                    <Radio>
+                                        <Label>
+                                            <input
+                                                type="radio"
+                                                onChange={handleOptionChange}
+                                                value={`10"`}
+                                                checked={
+                                                    cartForm.size === `10"`
+                                                }
+                                                required={true}
+                                            />
+                                            Petite(10")
+                                        </Label>
+                                    </Radio>
+                                    <Radio>
+                                        <Label>
+                                            <input
+                                                type="radio"
+                                                onChange={handleOptionChange}
+                                                value={`12"`}
+                                                checked={
+                                                    cartForm.size === `12"`
+                                                }
+                                                required={true}
+                                            />
+                                            Petite(12")
+                                        </Label>
+                                    </Radio>
+                                    <Radio>
+                                        <Label>
+                                            <input
+                                                type="radio"
+                                                onChange={handleOptionChange}
+                                                value={`14"`}
+                                                checked={
+                                                    cartForm.size === `14"`
+                                                }
+                                                required={true}
+                                            />
+                                            Petite(14")
+                                        </Label>
+                                    </Radio>
+                                    <Radio>
+                                        <Label>
+                                            <input
+                                                type="radio"
+                                                onChange={handleOptionChange}
+                                                value={`16"`}
+                                                checked={
+                                                    cartForm.size === `16"`
+                                                }
+                                                required={true}
+                                            />
+                                            Petite(16")
+                                        </Label>
+                                    </Radio>
+                                </RadioBox>
+                            </SizeBox>
+                            <ExtraBox>
+                                <Titles>Extras *max 4 : </Titles>
+                                <ExtraContainer>
+                                    {fastFoodExtras.map((each) => {
+                                        return (
+                                            <div key={each.name + each.price}>
+                                                <ExtraBtn
+                                                    type="button"
+                                                    id={each.name}
+                                                    onClick={(e) =>
+                                                        handleExtraClilck(
+                                                            e,
+                                                            each.price
+                                                        )
+                                                    }
+                                                >
+                                                    <ExtraName>
+                                                        {each.name}
+                                                    </ExtraName>
+                                                    <ExtraPrice>
+                                                        {each.price}
+                                                    </ExtraPrice>
+                                                </ExtraBtn>
+                                            </div>
+                                        );
+                                    })}
+                                </ExtraContainer>
+                            </ExtraBox>
+                            <ItemInformationBox>
+                                {btnExtras.map((extra) => {
+                                    return (
+                                        <AddedExtraBtn
+                                            key={extra}
+                                            id={extra}
+                                            onClick={deleteItem}
+                                        >
+                                            {extra}
+                                        </AddedExtraBtn>
+                                    );
+                                })}
+                            </ItemInformationBox>
+                            <ItemQuantity>
+                                <Label>
+                                    Quantity:
+                                    <Select
+                                        value={quantity}
+                                        onChange={handleQuantityChange}
+                                    >
+                                        {[...Array(5)].map((_, i) => (
+                                            <option key={i} value={i + 1}>
+                                                {i + 1}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </Label>
+                            </ItemQuantity>
+                            <EndBox>
+                                <CartButton onClick={handleAddCartBtn}>
+                                    Ajouter au panier
+                                </CartButton>
+                                <ItemPrice>
+                                    {" "}
+                                    Prix : {cartForm.price.toFixed(2)}
+                                </ItemPrice>
+                            </EndBox>
+                        </form>
+                    </div>
+                </>
+            );
         default:
             break;
     }
