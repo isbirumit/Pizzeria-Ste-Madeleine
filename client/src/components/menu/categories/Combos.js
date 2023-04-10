@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import AddCartModal from "../../modal/AddCartModal"
 import AddCartButton from "../../AddCartButton"
 import BG from "../../../public/backgroundimgs/combos.jpg"
 
@@ -8,7 +9,8 @@ const Combos = () => {
     const [combos,setCombos] = useState([])
     const [categories,setCategories] = useState([])
     const navigate = useNavigate()
-
+    const [selectedItem,setSelectedItem] = useState()
+    const [isOpen,setIsOpen] = useState(false)  
     useEffect(() => {
         fetch('/stm/combos')
         .then((res) => res.json())
@@ -29,9 +31,28 @@ const Combos = () => {
         }
     },[combos])
 
+    const handleClick = (e) => {
+        fetch(`/stm/combos/${e.currentTarget.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.status === 404){
+                navigate('/*')
+            }else if(data.status === 200){
+                setSelectedItem(data.data)
+                setIsOpen(true)
+            }
+        })
+    }  
+    const handleModalClick = () => {
+        setIsOpen(false)
+    }
+
     return (
         <Body style={{backgroundImage: `url(${BG})`}}>
+            {isOpen ? <AddCartModal type="combos" item={selectedItem} handleModalClick={handleModalClick} />
+            :
             <PageContainer>
+
                 <Description>Notre menu spécial chez Pizzeria Ste Madeleine est une expérience culinaire unique que vous ne voulez pas manquer. Chaque plat a été soigneusement conçu et préparé avec des ingrédients de qualité supérieure pour une expérience de repas inoubliable. Que vous cherchiez à essayer notre pizza spéciale, nos pâtes faites maison, chaque option sur notre menu spécial est garantie pour satisfaire votre palais et vous laisser vouloir plus. Commandez en ligne dès maintenant et offrez-vous une expérience de repas inoubliable avec notre menu spécial chez Pizzeria Ste Madeleine.</Description>
                 {
                     combos 
@@ -44,12 +65,12 @@ const Combos = () => {
                                     combos.map(combo => {
                                         if(combo.category === category){
                                             return (
-                                                <IndItemBox>
+                                                <IndItemBox key={combo.name + combo._id}>
                                                     <ItemTitle>{combo.name}</ItemTitle>
                                                     <ItemDesc>{combo.description}</ItemDesc>
                                                     <ItemBottomBox>
-                                                        <ItemPrice>À partir de : <span style={{fontSize:"2.8rem"}}>{combo.price[`small`]}$</span></ItemPrice>
-                                                        <Button item={combo}/>
+                                                        <ItemPrice>À partir de : <span style={{fontSize:"2.8rem"}}>{combo.price}$</span></ItemPrice>
+                                                        <Button id={combo._id} handleClick={handleClick}/>
                                                     </ItemBottomBox>
                                                 </IndItemBox>
                                             )
@@ -62,13 +83,13 @@ const Combos = () => {
                     :
                     <h1>Loading</h1>
                 }
-            </PageContainer>
+            </PageContainer>}
         </Body>
     )
 }
 
 
-const Body = styled.body`
+const Body = styled.div`
     background-repeat: no-repeat;
     background-size:cover;
     background-position:center;   
