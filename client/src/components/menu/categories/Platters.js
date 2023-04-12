@@ -18,7 +18,6 @@ const Platters = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setPlatters(data.data);
                 }
             });

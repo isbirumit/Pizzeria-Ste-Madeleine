@@ -18,6 +18,10 @@ import Salads from "./menu/categories/Salads";
 import Snacks from "./menu/categories/Snacks";
 import { ToastContainer } from "react-toastify";
 import OrderNow from "./menu/OrderNow";
+import Cart from "./profil/Cart";
+import Payment from "./profil/Payment";
+import Successfull from "./profil/Successfull";
+import Success from "./profil/Success";
 
 function App() {
     return (
@@ -33,6 +37,17 @@ function App() {
                             path="/profil/:userName"
                             element={<ProfilPage />}
                         />
+                        <Route path="/:userName/cart" element={<Cart />} />
+                        <Route
+                            path="/:userName/cart/payment"
+                            element={<Payment />}
+                        />
+                        <Route
+                            path="/:userName/cart/payment/successfull"
+                            element={<Successfull />}
+                        />
+                        <Route path="/successfull" element={<Success />} />
+
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/order" element={<OrderNow />} />
                         <Route path="/menu/2pizzas" element={<TwoPizza />} />

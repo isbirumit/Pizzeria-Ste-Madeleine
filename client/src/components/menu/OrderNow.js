@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AddCartModal from "../modal/AddCartModal";
+import FidgetSpinner from "../FidgetSpinner";
 
 const OrderNow = () => {
     const [combos, setCombos] = useState([]);
@@ -13,6 +14,7 @@ const OrderNow = () => {
     const [selectedItem, setSelectedItem] = useState();
     const [selectedItemType, setSelectedItemType] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const [pageLoaded, setPageLoaded] = useState(false);
 
     const navigate = useNavigate();
     //Useeffect fetch
@@ -32,7 +34,6 @@ const OrderNow = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setPoutines(data.data);
                 }
             });
@@ -42,7 +43,6 @@ const OrderNow = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setPlatters(data.data);
                 }
             });
@@ -61,8 +61,8 @@ const OrderNow = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setPizzas(data.data);
+                    setPageLoaded(true);
                 }
             });
 
@@ -152,184 +152,231 @@ const OrderNow = () => {
         setIsOpen(false);
     };
     return (
-        <PageContainer>
-            <PageHeader>
-                <PageTitle>Commandez en ligne !</PageTitle>
-                <PageDesc>
-                    Bienvenue ! Avec notre programme de fidélité, vous pouvez
-                    maintenant gagner des points à chaque commande passée.
-                    Chaque point vous rapproche un peu plus de récompenses
-                    exclusives, alors commencez dès aujourd'hui à accumuler des
-                    points pour des offres spéciales, des cadeaux et plus encore
-                    !
-                </PageDesc>
-            </PageHeader>
-            {isOpen ? (
-                <AddCartModal
-                    type={selectedItemType}
-                    item={selectedItem}
-                    handleModalClick={handleModalClick}
-                />
+        <>
+            {!pageLoaded ? (
+                <FidgetSpinner />
             ) : (
-                <PageBody>
-                    <Category>
-                        <div>
-                            <CatName>Nos Pizzas 2 pour 1</CatName>
-                            <ButtonBox>
-                                {pizzas.map((pizza) => {
-                                    return (
-                                        <CatBtn
-                                            id={pizza._id}
-                                            onClick={handleClickPizzas}
-                                            key={pizza.name + pizza._id}
-                                        >
-                                            <ItemName>{pizza.name}</ItemName>
-                                            <ItemDesc>
-                                                {pizza.description}
-                                            </ItemDesc>
-                                            <ItemPrice>
-                                                À partir de :{" "}
-                                                <span
-                                                    style={{
-                                                        fontSize: "2.8rem",
-                                                    }}
+                <PageContainer>
+                    <PageHeader>
+                        <PageTitle>Commandez en ligne !</PageTitle>
+                        <PageDesc>
+                            Bienvenue ! Avec notre programme de fidélité, vous
+                            pouvez maintenant gagner des points à chaque
+                            commande passée. Chaque point vous rapproche un peu
+                            plus de récompenses exclusives, alors commencez dès
+                            aujourd'hui à accumuler des points pour des offres
+                            spéciales, des cadeaux et plus encore !
+                        </PageDesc>
+                    </PageHeader>
+                    {isOpen ? (
+                        <AddCartModal
+                            type={selectedItemType}
+                            item={selectedItem}
+                            handleModalClick={handleModalClick}
+                        />
+                    ) : (
+                        <PageBody>
+                            <Category>
+                                <div>
+                                    <CatName>Nos Pizzas 2 pour 1</CatName>
+                                    <ButtonBox>
+                                        {pizzas.map((pizza) => {
+                                            return (
+                                                <CatBtn
+                                                    id={pizza._id}
+                                                    onClick={handleClickPizzas}
+                                                    key={pizza.name + pizza._id}
                                                 >
-                                                    {pizza.price[`10"`]}$
-                                                </span>
-                                            </ItemPrice>
-                                        </CatBtn>
-                                    );
-                                })}
-                            </ButtonBox>
-                        </div>
-                    </Category>
-                    <Category>
-                        <div>
-                            <CatName>Nos Pâtes</CatName>
-                            <ButtonBox>
-                                {pastas.map((pasta) => {
-                                    return (
-                                        <CatBtn
-                                            id={pasta._id}
-                                            onClick={handleClickPasta}
-                                            key={pasta.name + pasta._id}
-                                        >
-                                            <ItemName>{pasta.name}</ItemName>
-                                            <ItemDesc>
-                                                {pasta.description}
-                                            </ItemDesc>
-                                            <ItemPrice>
-                                                À partir de :{" "}
-                                                <span
-                                                    style={{
-                                                        fontSize: "2.8rem",
-                                                    }}
+                                                    <ItemName>
+                                                        {pizza.name}
+                                                    </ItemName>
+                                                    <ItemDesc>
+                                                        {pizza.description}
+                                                    </ItemDesc>
+                                                    <ItemPrice>
+                                                        À partir de :{" "}
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "2.8rem",
+                                                            }}
+                                                        >
+                                                            {pizza.price[`10"`]}
+                                                            $
+                                                        </span>
+                                                    </ItemPrice>
+                                                </CatBtn>
+                                            );
+                                        })}
+                                    </ButtonBox>
+                                </div>
+                            </Category>
+                            <Category>
+                                <div>
+                                    <CatName>Nos Pâtes</CatName>
+                                    <ButtonBox>
+                                        {pastas.map((pasta) => {
+                                            return (
+                                                <CatBtn
+                                                    id={pasta._id}
+                                                    onClick={handleClickPasta}
+                                                    key={pasta.name + pasta._id}
                                                 >
-                                                    {pasta.price[`small`]}$
-                                                </span>
-                                            </ItemPrice>
-                                        </CatBtn>
-                                    );
-                                })}
-                            </ButtonBox>
-                        </div>
-                    </Category>
-                    <Category>
-                        <div>
-                            <CatName>Nos Assièttes</CatName>
-                            <ButtonBox>
-                                {platters.map((platter) => {
-                                    return (
-                                        <CatBtn
-                                            id={platter._id}
-                                            onClick={handleClickPlatters}
-                                            key={platter.name + platter._id}
-                                        >
-                                            <ItemName>{platter.name}</ItemName>
-                                            <ItemDesc>
-                                                {platter.description}
-                                            </ItemDesc>
-                                            <ItemPrice>
-                                                À partir de :{" "}
-                                                <span
-                                                    style={{
-                                                        fontSize: "2.8rem",
-                                                    }}
+                                                    <ItemName>
+                                                        {pasta.name}
+                                                    </ItemName>
+                                                    <ItemDesc>
+                                                        {pasta.description}
+                                                    </ItemDesc>
+                                                    <ItemPrice>
+                                                        À partir de :{" "}
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "2.8rem",
+                                                            }}
+                                                        >
+                                                            {
+                                                                pasta.price[
+                                                                    `small`
+                                                                ]
+                                                            }
+                                                            $
+                                                        </span>
+                                                    </ItemPrice>
+                                                </CatBtn>
+                                            );
+                                        })}
+                                    </ButtonBox>
+                                </div>
+                            </Category>
+                            <Category>
+                                <div>
+                                    <CatName>Nos Assièttes</CatName>
+                                    <ButtonBox>
+                                        {platters.map((platter) => {
+                                            return (
+                                                <CatBtn
+                                                    id={platter._id}
+                                                    onClick={
+                                                        handleClickPlatters
+                                                    }
+                                                    key={
+                                                        platter.name +
+                                                        platter._id
+                                                    }
                                                 >
-                                                    {platter.price[`ind`]}$
-                                                </span>
-                                            </ItemPrice>
-                                        </CatBtn>
-                                    );
-                                })}
-                            </ButtonBox>
-                        </div>
-                    </Category>
-                    <Category>
-                        <div>
-                            <CatName>Nos Spéciaux</CatName>
-                            <ButtonBox>
-                                {combos.map((combo) => {
-                                    return (
-                                        <CatBtn
-                                            id={combo._id}
-                                            onClick={handleClickCombo}
-                                            key={combo.name + combo._id}
-                                        >
-                                            <ItemName>{combo.name}</ItemName>
-                                            <ItemDesc>
-                                                {combo.description}
-                                            </ItemDesc>
-                                            <ItemPrice>
-                                                À partir de :{" "}
-                                                <span
-                                                    style={{
-                                                        fontSize: "2.8rem",
-                                                    }}
+                                                    <ItemName>
+                                                        {platter.name}
+                                                    </ItemName>
+                                                    <ItemDesc>
+                                                        {platter.description}
+                                                    </ItemDesc>
+                                                    <ItemPrice>
+                                                        À partir de :{" "}
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "2.8rem",
+                                                            }}
+                                                        >
+                                                            {
+                                                                platter.price[
+                                                                    `ind`
+                                                                ]
+                                                            }
+                                                            $
+                                                        </span>
+                                                    </ItemPrice>
+                                                </CatBtn>
+                                            );
+                                        })}
+                                    </ButtonBox>
+                                </div>
+                            </Category>
+                            <Category>
+                                <div>
+                                    <CatName>Nos Spéciaux</CatName>
+                                    <ButtonBox>
+                                        {combos.map((combo) => {
+                                            return (
+                                                <CatBtn
+                                                    id={combo._id}
+                                                    onClick={handleClickCombo}
+                                                    key={combo.name + combo._id}
                                                 >
-                                                    {combo.price}$
-                                                </span>
-                                            </ItemPrice>
-                                        </CatBtn>
-                                    );
-                                })}
-                            </ButtonBox>
-                        </div>
-                    </Category>
-                    <Category>
-                        <div>
-                            <CatName>Nos Poutines</CatName>
-                            <ButtonBox>
-                                {poutines.map((poutine) => {
-                                    return (
-                                        <CatBtn
-                                            id={poutine._id}
-                                            onClick={handleClickPoutines}
-                                            key={poutine.name + poutine._id}
-                                        >
-                                            <ItemName>{poutine.name}</ItemName>
-                                            <ItemDesc>
-                                                {poutine.description}
-                                            </ItemDesc>
-                                            <ItemPrice>
-                                                À partir de :{" "}
-                                                <span
-                                                    style={{
-                                                        fontSize: "2.8rem",
-                                                    }}
+                                                    <ItemName>
+                                                        {combo.name}
+                                                    </ItemName>
+                                                    <ItemDesc>
+                                                        {combo.description}
+                                                    </ItemDesc>
+                                                    <ItemPrice>
+                                                        À partir de :{" "}
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "2.8rem",
+                                                            }}
+                                                        >
+                                                            {combo.price}$
+                                                        </span>
+                                                    </ItemPrice>
+                                                </CatBtn>
+                                            );
+                                        })}
+                                    </ButtonBox>
+                                </div>
+                            </Category>
+                            <Category>
+                                <div>
+                                    <CatName>Nos Poutines</CatName>
+                                    <ButtonBox>
+                                        {poutines.map((poutine) => {
+                                            return (
+                                                <CatBtn
+                                                    id={poutine._id}
+                                                    onClick={
+                                                        handleClickPoutines
+                                                    }
+                                                    key={
+                                                        poutine.name +
+                                                        poutine._id
+                                                    }
                                                 >
-                                                    {poutine.price[`small`]}$
-                                                </span>
-                                            </ItemPrice>
-                                        </CatBtn>
-                                    );
-                                })}
-                            </ButtonBox>
-                        </div>
-                    </Category>
-                </PageBody>
+                                                    <ItemName>
+                                                        {poutine.name}
+                                                    </ItemName>
+                                                    <ItemDesc>
+                                                        {poutine.description}
+                                                    </ItemDesc>
+                                                    <ItemPrice>
+                                                        À partir de :{" "}
+                                                        <span
+                                                            style={{
+                                                                fontSize:
+                                                                    "2.8rem",
+                                                            }}
+                                                        >
+                                                            {
+                                                                poutine.price[
+                                                                    `small`
+                                                                ]
+                                                            }
+                                                            $
+                                                        </span>
+                                                    </ItemPrice>
+                                                </CatBtn>
+                                            );
+                                        })}
+                                    </ButtonBox>
+                                </div>
+                            </Category>
+                        </PageBody>
+                    )}
+                </PageContainer>
             )}
-        </PageContainer>
+        </>
     );
 };
 

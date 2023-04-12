@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import BG from "../../../public/MenuBG/snacks.jpg";
+import BG from "../../../public/backgroundimgs/loginBGIMG.jpg";
 import AddCartButton from "../../AddCartButton";
 import AddCartModal from "../../modal/AddCartModal";
 import Pastas from "./Pastas";
@@ -19,7 +19,6 @@ const Snacks = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setSnacks(data.data);
                 }
             });

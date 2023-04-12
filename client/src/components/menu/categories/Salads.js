@@ -18,7 +18,6 @@ const Salads = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setSalads(data.data);
                 }
             });

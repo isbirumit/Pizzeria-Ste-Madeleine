@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import BG from "../../../public/backgroundimgs/TwoPizzaBG.jpg";
+import BG from "../../../public/backgroundimgs/loginBGIMG.jpg";
 import AddCartButton from "../../AddCartButton";
 import AddCartModal from "../../modal/AddCartModal";
 
@@ -18,7 +18,6 @@ const TwoPizza = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setPizzas(data.data);
                 }
             });

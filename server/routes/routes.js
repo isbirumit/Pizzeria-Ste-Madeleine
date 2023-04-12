@@ -6,6 +6,11 @@ const router = require("express").Router();
 const { getWeather } = require("../handlers/weather");
 router.get("/stm/weather", getWeather);
 
+//stripe
+const { getPublicKey, createPayment } = require("../handlers/stripe");
+router.get("/config", getPublicKey);
+router.post("/create-checkout-session", createPayment);
+router.get("/order/success");
 //users
 const { getUser, getUsers, addUser } = require("../handlers/users");
 
@@ -14,8 +19,10 @@ router.get("/stm/users/:userEmail/:password", getUser);
 router.post("/stm/user", addUser);
 
 //cart
-const { addCart } = require("../handlers/cart");
+const { addCart, getCart, patchCart } = require("../handlers/cart");
 router.post("/stm/cart", addCart);
+router.get("/stm/cart/:userId", getCart);
+router.patch("/stm/cart", patchCart);
 //orders
 const {
     getOrders,

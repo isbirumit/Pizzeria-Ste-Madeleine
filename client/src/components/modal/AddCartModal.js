@@ -31,7 +31,6 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
     const [itemIndPrice, setItemIndPrice] = useState(0);
     const [loadedCategory, setLoadedCategory] = useState(false);
     //
-    console.log(item);
     //Handlers
 
     const handleSubmit = (e) => {
@@ -70,7 +69,6 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
         });
         setItemIndPrice(cartForm.price);
     };
-    console.log("item ind price : ", itemIndPrice);
     const handleExtraClilck = (e, prc) => {
         if (btnExtras.length < 4) {
             btnExtras.push(e.currentTarget.id);
@@ -151,9 +149,7 @@ const AddCartModal = ({ type, item, handleModalClick }) => {
         }
         setItemIndPrice(cartForm.price);
     }, []);
-    console.log("Object keys : ", Object.keys(item.price).length);
 
-    console.log(cartForm);
     switch (type) {
         case "pasta":
             return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AddCartButton from "../../AddCartButton";
-import BG from "../../../public/backgroundimgs/submarine.jpg";
+import BG from "../../../public/backgroundimgs/loginBGIMG.jpg";
 import AddCartModal from "../../modal/AddCartModal";
 
 const Submarines = () => {
@@ -18,7 +18,6 @@ const Submarines = () => {
                 if (data.status === 404) {
                     navigate("/*");
                 } else if (data.status === 200) {
-                    console.log(data.data);
                     setSubmarines(data.data);
                 }
             });
